@@ -1,3 +1,3 @@
-# CockTails
-#Use MVVM
-#Package by feature
+# CockTails\n
+# Use MVVM \n
+# Package by feature
