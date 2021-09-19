@@ -53,4 +53,6 @@ dependencies {
     implementation daggerHiltDependencies
     kapt kaptDependecies
     implementation coroutinesDependencies
+    implementation architecturalComponents
+    implementation retrofitDependencies
 }
