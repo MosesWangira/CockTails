@@ -33,8 +33,6 @@ data class Drink(
     val strInstructionsES: Any,
     val strInstructionsFR: Any,
     val strInstructionsIT: String,
-    val strInstructionsZH-HANS: Any,
-    val strInstructionsZH-HANT: Any,
     val strMeasure1: String,
     val strMeasure10: Any,
     val strMeasure11: Any,

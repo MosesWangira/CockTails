@@ -9,7 +9,9 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.mosesaltruism.cocktails.R
 import com.mosesaltruism.cocktails.databinding.DashBoardBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DashBoard : AppCompatActivity() {
     lateinit var binding: DashBoardBinding
     private lateinit var appBarConfiguration: AppBarConfiguration

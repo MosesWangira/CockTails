@@ -1,5 +1,5 @@
 package com.mosesaltruism.cocktails.data.model.home
 
-data class GinCockTail(
+data class SearchCockTail(
     val drinks: List<Drink>
 )
