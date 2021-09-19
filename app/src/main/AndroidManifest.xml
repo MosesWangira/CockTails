@@ -10,7 +10,7 @@
         android:name=".CockTails"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.CockTails"
+        android:theme="@style/splashScreenTheme"
         tools:ignore="AllowBackup">
         <activity
             android:name=".core.common.base.DashBoard"

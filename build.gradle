@@ -26,6 +26,16 @@ buildscript {
                 'junit:junit:4.13.2'
         ]
 
+        daggerHiltDependencies = [
+                'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03',
+                'com.google.dagger:hilt-android:2.38'
+        ]
+
+        kaptDependecies = [
+                'com.google.dagger:hilt-android-compiler:2.33-beta',
+                'androidx.hilt:hilt-compiler:1.0.0',
+        ]
+
     }
 
     repositories {
@@ -33,9 +43,10 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:7.0.2"
+        classpath "com.android.tools.build:gradle:4.2.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:2.38"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
