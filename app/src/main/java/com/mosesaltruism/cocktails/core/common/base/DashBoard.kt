@@ -1,7 +1,7 @@
 package com.mosesaltruism.cocktails.core.common.base
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -22,7 +22,8 @@ class DashBoard : AppCompatActivity() {
          * */
         setTheme(R.style.Theme_CockTails)
 
-        binding = DataBindingUtil.setContentView(this,
+        binding = DataBindingUtil.setContentView(
+            this,
             R.layout.dash_board
         )
 

@@ -37,7 +37,8 @@ class Home : BaseFragment<HomeBinding>() {
                 viewModel.searchList.collect {
                     when (it) {
                         is EventStates.Success -> {
-                            Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
+                            Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG)
+                                .show()
                         }
                         is EventStates.Failure -> {
 

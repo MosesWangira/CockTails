@@ -1,5 +1,6 @@
 package com.mosesaltruism.cocktails.presentation.byname
 
+import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mosesaltruism.cocktails.core.common.util.DispatcherProvider
@@ -14,10 +15,10 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel@Inject constructor(
+class HomeViewModel @Inject constructor(
     private val repository: SearchRepository,
     private val dispatchers: DispatcherProvider
-): ViewModel() {
+) : ViewModel() {
     private val _searchList = MutableStateFlow<EventStates<Response<SearchCockTail>>>(
         EventStates.Empty
     )
