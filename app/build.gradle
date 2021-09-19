@@ -52,4 +52,5 @@ dependencies {
     testImplementation testingDependencies
     implementation daggerHiltDependencies
     kapt kaptDependecies
+    implementation coroutinesDependencies
 }
