@@ -4,6 +4,9 @@ buildscript {
     ext {
         kotlin_version = "1.5.20"
         nav_version = "2.3.5"
+        glide = "4.11.0"
+        room_version = "2.3.0-alpha04"
+        version_work = "1.0.1"
 
         navigationGraphDependencies = [
                 "androidx.navigation:navigation-fragment-ktx:$nav_version",
@@ -34,16 +37,17 @@ buildscript {
         kaptDependecies = [
                 'com.google.dagger:hilt-android-compiler:2.33-beta',
                 'androidx.hilt:hilt-compiler:1.0.0',
+                "com.github.bumptech.glide:compiler:$glide",
+                'androidx.room:room-compiler:2.3.0'
         ]
 
         coroutinesDependencies = [
                 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3',
                 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0',
-                'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-beta01',
 
                 // Coroutine Lifecycle Scopes
                 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1',
-                'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
+                'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha02'
         ]
 
         architecturalComponents = [
@@ -61,6 +65,26 @@ buildscript {
                 'com.squareup.okhttp3:logging-interceptor:4.9.0'
         ]
 
+        ktxDependencies = [
+                'androidx.core:core-ktx:1.6.0'
+        ]
+
+        loggs = [
+                'com.jakewharton.timber:timber:4.7.1'
+        ]
+
+        glide = [
+                 "com.github.bumptech.glide:glide:$glide"
+        ]
+
+        roomDependencies = [
+                "androidx.room:room-runtime:$room_version",
+                'androidx.room:room-ktx:2.3.0'
+        ]
+
+        workManagerDependency = [
+                "android.arch.work:work-runtime-ktx:$version_work"
+        ]
     }
 
     repositories {

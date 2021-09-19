@@ -8,6 +8,7 @@ plugins {
 
 android {
     compileSdk 30
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.mosesaltruism.cocktails"
@@ -55,4 +56,7 @@ dependencies {
     implementation coroutinesDependencies
     implementation architecturalComponents
     implementation retrofitDependencies
+    implementation ktxDependencies
+    implementation loggs
+    implementation glide
 }
