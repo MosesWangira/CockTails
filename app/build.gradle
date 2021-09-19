@@ -49,6 +49,7 @@ dependencies {
     //actual dependencies in project build gradle
     implementation generalDependencies
     implementation navigationGraphDependencies
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     androidTestImplementation androidTestImplemetationsDependencies
     testImplementation testingDependencies
     implementation daggerHiltDependencies
