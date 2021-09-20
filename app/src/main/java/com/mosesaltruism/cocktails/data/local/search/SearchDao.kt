@@ -9,15 +9,14 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface SearchDao {
-
     /**
-     * Insert list of cocktail in DB
+     * Insert list of cocktails in DB
      * get list of cockTails in DB
      * */
 
     @Query("select * from searched_cocktail")
-    fun getAttacks(): Flow<List<SearchedCockTailItem>>
+    fun getCockTailNameList(): Flow<List<SearchedCockTailItem>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll( searchedCockTail: Flow<SearchedCockTailItem>)
+    fun insertAll( searchedCockTail: List<SearchedCockTailItem>)
 }

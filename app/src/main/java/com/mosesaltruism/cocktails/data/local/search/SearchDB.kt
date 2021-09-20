@@ -7,7 +7,8 @@ import com.mosesaltruism.cocktails.domain.byname.entities.search.SearchedCockTai
 
 @Database(
     entities = [SearchedCockTailItem::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 abstract class SearchDB: RoomDatabase() {
 

@@ -13,8 +13,8 @@ data class Drink(
     val strImageSource: String,
     val strInstructions: String,
     val strInstructionsDE: String,
-    val strInstructionsES: Any,
-    val strInstructionsFR: Any,
+    val strInstructionsES: String,
+    val strInstructionsFR: String,
     val strInstructionsIT: String,
     val strTags: String
 )
