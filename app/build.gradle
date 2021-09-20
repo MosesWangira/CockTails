@@ -61,4 +61,5 @@ dependencies {
     implementation ktxDependencies
     implementation loggs
     implementation glide
+    implementation roomDependencies
 }

@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mosesaltruism.cocktails.core.common.util.DispatcherProvider
 import com.mosesaltruism.cocktails.core.common.util.EventStates
-import com.mosesaltruism.cocktails.data.model.home.SearchCockTail
+import com.mosesaltruism.cocktails.data.model.search.SearchCockTail
 import com.mosesaltruism.cocktails.data.repository.SearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

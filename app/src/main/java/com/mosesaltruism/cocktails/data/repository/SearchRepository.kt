@@ -1,7 +1,7 @@
 package com.mosesaltruism.cocktails.data.repository
 
 import com.mosesaltruism.cocktails.core.common.base.BaseRepository
-import com.mosesaltruism.cocktails.domain.byname.interfaces.SearchApi
+import com.mosesaltruism.cocktails.data.remote.SearchApi
 import javax.inject.Inject
 
 

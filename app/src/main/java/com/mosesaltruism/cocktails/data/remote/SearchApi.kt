@@ -1,7 +1,7 @@
-package com.mosesaltruism.cocktails.domain.byname.interfaces
+package com.mosesaltruism.cocktails.data.remote
 
 import com.mosesaltruism.cocktails.core.common.base.BaseApi
-import com.mosesaltruism.cocktails.data.model.home.SearchCockTail
+import com.mosesaltruism.cocktails.data.model.search.SearchCockTail
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
