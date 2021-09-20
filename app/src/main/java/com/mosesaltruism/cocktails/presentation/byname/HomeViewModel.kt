@@ -18,16 +18,16 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val repository: SearchRepository,
     private val dispatchers: DispatcherProvider
-) : ViewModel() {
+) : ViewModel(), LifecycleObserver {
     private val _searchList = MutableStateFlow<EventStates<Response<SearchCockTail>>>(
         EventStates.Empty
     )
     val searchList: StateFlow<EventStates<Response<SearchCockTail>>> = _searchList
 
-    fun loadCockTails() {
+    fun loadCockTails(cockTailName: String) {
         viewModelScope.launch(dispatchers.io) {
             _searchList.value = EventStates.Loading
-            _searchList.value = repository.getSearchResponse()
+            _searchList.value = repository.getSearchResponse(cockTailName)
         }
     }
 }

@@ -14,16 +14,17 @@ import com.mosesaltruism.cocktails.databinding.HomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @AndroidEntryPoint
 class Home : BaseFragment<HomeBinding>() {
-    private val viewModel: HomeViewModel by viewModels()
     override fun getFragmentView(): Int = R.layout.home
+    private val viewModel: HomeViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.loadCockTails()
+        viewModel.loadCockTails("gin")
         showSearchedCockTail()
     }
 
@@ -37,8 +38,7 @@ class Home : BaseFragment<HomeBinding>() {
                 viewModel.searchList.collect {
                     when (it) {
                         is EventStates.Success -> {
-                            Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG)
-                                .show()
+                            binding.tester.text = it.toString()
                         }
                         is EventStates.Failure -> {
 

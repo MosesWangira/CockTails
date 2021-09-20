@@ -8,5 +8,9 @@ import javax.inject.Inject
 class SearchRepository @Inject constructor(
     private val api: SearchApi
 ) : BaseRepository(api) {
-    suspend fun getSearchResponse() = safeApiCalls(api::getSearchedCocktail)
+    suspend fun getSearchResponse(
+        s: String
+    ) = safeApiCalls{
+        api.getSearchedCocktail(s)
+    }
 }

@@ -20,7 +20,7 @@ import javax.inject.Singleton
 object AppModule {
     @Singleton
     @Provides
-    fun provideMessageApi(): SearchApi = Retrofit.Builder()
+    fun provideCocktailsApi(): SearchApi = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
