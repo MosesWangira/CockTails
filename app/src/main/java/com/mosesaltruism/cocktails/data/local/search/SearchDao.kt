@@ -1,6 +1,5 @@
 package com.mosesaltruism.cocktails.data.local.search
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
