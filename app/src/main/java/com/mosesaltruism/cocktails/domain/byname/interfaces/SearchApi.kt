@@ -7,6 +7,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface SearchApi: BaseApi {
-    @GET("/search.php")
+    @GET("search.php")
     suspend fun getSearchedCocktail(@Query("s") s: String): Response<SearchCockTail>
 }
