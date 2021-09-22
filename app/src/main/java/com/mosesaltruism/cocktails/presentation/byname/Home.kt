@@ -38,7 +38,7 @@ class Home : BaseFragment<HomeBinding>() {
                 viewModel.searchList.collect {
                     when (it) {
                         is EventStates.Success -> {
-                            binding.tester.text = it.successResponse.body().toString()
+                            binding.tester.text = it.successResponse.body()?.drinks.toString()
                         }
                         is EventStates.Failure -> {
 
