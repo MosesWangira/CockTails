@@ -62,4 +62,5 @@ dependencies {
     implementation loggs
     implementation glide
     implementation roomDependencies
+    implementation dataStoreDependency
 }

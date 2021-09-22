@@ -86,6 +86,10 @@ buildscript {
         workManagerDependency = [
                 "android.arch.work:work-runtime-ktx:$version_work"
         ]
+
+        dataStoreDependency = [
+                'androidx.datastore:datastore-preferences:1.0.0-beta02'
+        ]
     }
 
     repositories {
