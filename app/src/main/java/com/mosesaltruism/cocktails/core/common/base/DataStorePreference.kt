@@ -23,7 +23,7 @@ class DataStorePreference @Inject constructor(@ApplicationContext context: Conte
         }
 
 
-    suspend fun saveAccessTokens(accessToken: String, refreshToken: String) {
+    suspend fun saveSearchedCockTailName(accessToken: String) {
         appContext.dataStore.edit { preferences ->
             preferences[COCKTAIL_NAME] = accessToken
         }

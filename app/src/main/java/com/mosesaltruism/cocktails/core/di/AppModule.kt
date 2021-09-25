@@ -2,13 +2,15 @@ package com.mosesaltruism.cocktails.core.di
 
 import android.content.Context
 import androidx.room.Room
+import com.mosesaltruism.cocktails.core.common.base.DataStorePreference
 import com.mosesaltruism.cocktails.core.common.base.SafeApiCalls
 import com.mosesaltruism.cocktails.core.common.util.Constants.BASE_URL
 import com.mosesaltruism.cocktails.core.common.util.Constants.DATABASE_NAME
 import com.mosesaltruism.cocktails.core.common.util.DispatcherProvider
 import com.mosesaltruism.cocktails.data.local.search.SearchDB
-import com.mosesaltruism.cocktails.data.repository.SearchRepository
+import com.mosesaltruism.cocktails.data.local.search.SearchDao
 import com.mosesaltruism.cocktails.data.remote.SearchApi
+import com.mosesaltruism.cocktails.data.repository.SearchRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,7 +35,12 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideSearchedCockTail(api: SearchApi): SafeApiCalls = SearchRepository(api)
+    fun provideSearchedCockTail(
+        api: SearchApi,
+        preferences: DataStorePreference,
+        dispatchers: DispatcherProvider,
+        searchDao: SearchDao
+    ): SafeApiCalls = SearchRepository(api, preferences, dispatchers, searchDao)
 
 
     /**
@@ -50,8 +57,6 @@ object AppModule {
     fun provideSearchDao(
         database: SearchDB
     ) = database.searchDao()
-
-
 
     /**
      * Dispatchers
