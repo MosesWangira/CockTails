@@ -9,6 +9,7 @@ import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -57,5 +58,9 @@ class CockTails : Application(), Configuration.Provider {
         super.onCreate()
         WorkManager.initialize(this, workManagerConfiguration)
         delayedInit()
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
     }
 }
