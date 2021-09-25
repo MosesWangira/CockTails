@@ -1,4 +1,4 @@
-package com.mosesaltruism.cocktails.core.common.base
+package com.mosesaltruism.cocktails.core.common.helper
 
 import android.content.Context
 import androidx.datastore.core.DataStore

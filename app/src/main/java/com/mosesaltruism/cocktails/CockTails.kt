@@ -4,7 +4,7 @@ import android.app.Application
 import android.os.Build
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.*
-import com.mosesaltruism.cocktails.core.common.base.WorkerManager
+import com.mosesaltruism.cocktails.core.common.helper.WorkerManager
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -56,11 +56,14 @@ class CockTails : Application(), Configuration.Provider {
 
     override fun onCreate() {
         super.onCreate()
-        WorkManager.initialize(this, workManagerConfiguration)
-        delayedInit()
 
+        //initialize Timber
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
+
+        //initialize WorkManager
+        WorkManager.initialize(this, workManagerConfiguration)
+        delayedInit()
     }
 }
