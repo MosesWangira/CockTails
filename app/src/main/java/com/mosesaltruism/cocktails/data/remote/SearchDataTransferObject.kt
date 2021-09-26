@@ -8,6 +8,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class NetworkSearchContainer(val result: List<NetworkDrink>)
 
+
 @JsonClass(generateAdapter = true)
 data class NetworkDrink(
     val idDrink: String,

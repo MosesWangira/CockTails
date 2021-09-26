@@ -1,4 +1,4 @@
-package com.mosesaltruism.cocktails.core.common.base
+package com.mosesaltruism.cocktails.core.common.helper
 
 import com.mosesaltruism.cocktails.data.remote.NetworkDrink
 import com.mosesaltruism.cocktails.data.remote.NetworkSearchContainer

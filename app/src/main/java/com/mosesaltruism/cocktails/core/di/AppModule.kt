@@ -2,8 +2,8 @@ package com.mosesaltruism.cocktails.core.di
 
 import android.content.Context
 import androidx.room.Room
-import com.mosesaltruism.cocktails.core.common.base.DataStorePreference
 import com.mosesaltruism.cocktails.core.common.base.SafeApiCalls
+import com.mosesaltruism.cocktails.core.common.helper.DataStorePreference
 import com.mosesaltruism.cocktails.core.common.util.Constants.BASE_URL
 import com.mosesaltruism.cocktails.core.common.util.Constants.DATABASE_NAME
 import com.mosesaltruism.cocktails.core.common.util.DispatcherProvider

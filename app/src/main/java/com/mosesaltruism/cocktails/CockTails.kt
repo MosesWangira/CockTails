@@ -57,13 +57,13 @@ class CockTails : Application(), Configuration.Provider {
     override fun onCreate() {
         super.onCreate()
 
+        //initialize WorkManager
+        WorkManager.initialize(this, workManagerConfiguration)
+        delayedInit()
+
         //initialize Timber
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
-
-        //initialize WorkManager
-        WorkManager.initialize(this, workManagerConfiguration)
-        delayedInit()
     }
 }

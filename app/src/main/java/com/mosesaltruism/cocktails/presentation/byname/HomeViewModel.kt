@@ -3,22 +3,16 @@ package com.mosesaltruism.cocktails.presentation.byname
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mosesaltruism.cocktails.core.common.base.DataStorePreference
+import com.mosesaltruism.cocktails.core.common.helper.DataStorePreference
 import com.mosesaltruism.cocktails.core.common.util.DispatcherProvider
-import com.mosesaltruism.cocktails.core.common.util.EventStates
 import com.mosesaltruism.cocktails.data.model.search.Drink
-import com.mosesaltruism.cocktails.data.model.search.SearchCockTail
 import com.mosesaltruism.cocktails.data.repository.SearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import retrofit2.Response
 import timber.log.Timber
-import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
