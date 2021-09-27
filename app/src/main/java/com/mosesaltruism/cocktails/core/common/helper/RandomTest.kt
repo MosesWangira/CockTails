@@ -1,6 +1,6 @@
 package com.mosesaltruism.cocktails.core.common.helper
 
-import com.mosesaltruism.cocktails.data.remote.NetworkDrink
+import com.mosesaltruism.cocktails.data.remote.Drink
 import com.mosesaltruism.cocktails.data.remote.NetworkSearchContainer
 
 /**
@@ -8,15 +8,10 @@ import com.mosesaltruism.cocktails.data.remote.NetworkSearchContainer
  **/
 
 fun ginListArray(): NetworkSearchContainer {
-    val ginList = arrayListOf<NetworkDrink>()
-    ginList.add(
-        NetworkDrink(
-            "24 july 2018", "1234", "alcoholic", "", "", "", "", "", "", "", "", "", "", "", "", ""
-        )
-    )
+    val ginList = arrayListOf<Drink>()
 
     ginList.add(
-        NetworkDrink(
+        Drink(
             "25 july 2019",
             "5678",
             "non-alcoholic",
@@ -37,13 +32,13 @@ fun ginListArray(): NetworkSearchContainer {
     )
 
     ginList.add(
-        NetworkDrink(
+        Drink(
             "26 july 2020", "4321", "alcoholic", "", "", "", "", "", "", "", "", "", "", "", "", ""
         )
     )
 
     ginList.add(
-        NetworkDrink(
+        Drink(
             "27 july 2021",
             "8765",
             "non-alcoholic",

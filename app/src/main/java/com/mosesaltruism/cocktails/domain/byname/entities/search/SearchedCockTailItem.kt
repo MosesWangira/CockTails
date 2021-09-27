@@ -2,7 +2,7 @@ package com.mosesaltruism.cocktails.domain.byname.entities.search
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.mosesaltruism.cocktails.data.model.search.Drink
+import com.mosesaltruism.cocktails.data.model.search.Drinks
 
 /**
  * SearchedCockTail represents a cocktail entity in the database.
@@ -31,9 +31,9 @@ data class SearchedCockTailItem constructor(
 /**
  * Map SearchedCockTailItem to domain entities
  */
-fun List<SearchedCockTailItem>.asDomainModel(): List<Drink> {
+fun List<SearchedCockTailItem>.asDomainModel(): List<Drinks> {
     return map {
-        Drink(
+        Drinks(
             idDrink = it.idDrink,
             dateModified = it.dateModified,
             strAlcoholic = it.strAlcoholic,

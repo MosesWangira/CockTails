@@ -28,7 +28,10 @@ class Home : BaseFragment<HomeBinding>() {
         //viewModel.loadCockTails("gin")
         //showSearchedCockTail()
 
-        viewModel.loadList
+
+
+        //two
+        //viewModel.loadList
         loadCockTailsSearched()
     }
 
@@ -44,28 +47,28 @@ class Home : BaseFragment<HomeBinding>() {
     }
 
 
-//    private fun showSearchedCockTail() {
-//        // Create a new coroutine
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            //automatically restarts the block when the lifecycle is STARTED again
-//            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-//                // Safely collect from locationFlow when the lifecycle is STARTED
-//                // and stops collection when the lifecycle is STOPPED
-//                viewModel.searchList.collect {
-//                    when (it) {
-//                        is EventStates.Success -> {
-//                            binding.tester.text = it.successResponse.body()?.drinks.toString()
-//                        }
-//                        is EventStates.Failure -> {
-//
-//                        }
-//                        is EventStates.Loading -> {
-//
-//                        }
-//                        else -> Unit
-//                    }
-//                }
-//            }
-//        }
-//    }
+    private fun showSearchedCockTail() {
+        // Create a new coroutine
+        viewLifecycleOwner.lifecycleScope.launch {
+            //automatically restarts the block when the lifecycle is STARTED again
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                // Safely collect from locationFlow when the lifecycle is STARTED
+                // and stops collection when the lifecycle is STOPPED
+                viewModel.searchList.collect {
+                    when (it) {
+                        is EventStates.Success -> {
+                            binding.tester.text = it.successResponse.drinks.toString()
+                        }
+                        is EventStates.Failure -> {
+
+                        }
+                        is EventStates.Loading -> {
+
+                        }
+                        else -> Unit
+                    }
+                }
+            }
+        }
+    }
 }

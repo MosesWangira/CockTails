@@ -1,6 +1,6 @@
 package com.mosesaltruism.cocktails.data.model.search
 
-data class Drink(
+data class Drinks(
     val dateModified: String,
     val idDrink: String,
     val strAlcoholic: String,

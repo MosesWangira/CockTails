@@ -5,13 +5,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mosesaltruism.cocktails.core.common.helper.DataStorePreference
 import com.mosesaltruism.cocktails.core.common.util.DispatcherProvider
-import com.mosesaltruism.cocktails.data.model.search.Drink
+import com.mosesaltruism.cocktails.core.common.util.EventStates
+import com.mosesaltruism.cocktails.data.model.search.Drinks
+//import com.mosesaltruism.cocktails.data.model.search.Drink
+//import com.mosesaltruism.cocktails.data.model.search.SearchCockTail
+import com.mosesaltruism.cocktails.data.remote.NetworkSearchContainer
 import com.mosesaltruism.cocktails.data.repository.SearchRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import retrofit2.Response
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -22,14 +29,16 @@ class HomeViewModel @Inject constructor(
     private val preferences: DataStorePreference
 ) : ViewModel(), LifecycleObserver {
 
-    private val searchedName = runBlocking { preferences.searchedCocktailName.first() ?: "Gin" }
+    private val searchedName = runBlocking { preferences.searchedCocktailName.first() ?: "gin" }
 
     init {
-        loadCockTailsRoom(searchedName)
+        loadCockTailsRoom()
     }
 
-    val loadList: Flow<List<Drink>> = repository.cockTailsSearched
-    private fun loadCockTailsRoom(cockTailName: String = " Gin"){
+    val loadList: Flow<List<Drinks>> = repository.cockTailsSearched
+
+
+    private fun loadCockTailsRoom(cockTailName: String = " gin"){
         viewModelScope.launch(dispatchers.io) {
             try {
                 repository.getSearchedCockTails(cockTailName)
@@ -41,16 +50,19 @@ class HomeViewModel @Inject constructor(
 
 
 
-//    private val _searchList = MutableStateFlow<EventStates<Response<SearchCockTail>>>(
-//        EventStates.Empty
-//    )
-//    val searchList: StateFlow<EventStates<Response<SearchCockTail>>> = _searchList
 
 
-//    fun loadCockTails(cockTailName: String) {
-//        viewModelScope.launch(dispatchers.io) {
-//            _searchList.value = EventStates.Loading
-//            _searchList.value = repository.getSearchResponse(cockTailName)
-//        }
-//    }
+
+    private val _searchList = MutableStateFlow<EventStates<NetworkSearchContainer>>(
+        EventStates.Empty
+    )
+    val searchList: StateFlow<EventStates<NetworkSearchContainer>> = _searchList
+
+
+    fun loadCockTails(cockTailName: String) {
+        viewModelScope.launch(dispatchers.io) {
+            _searchList.value = EventStates.Loading
+            _searchList.value = repository.getSearchResponse(cockTailName)
+        }
+    }
 }
