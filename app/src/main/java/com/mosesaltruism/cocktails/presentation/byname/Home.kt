@@ -13,7 +13,6 @@ import com.mosesaltruism.cocktails.core.common.base.BaseFragment
 import com.mosesaltruism.cocktails.core.common.util.EventStates
 import com.mosesaltruism.cocktails.data.remote.Drink
 import com.mosesaltruism.cocktails.data.remote.asDatabaseModel
-import com.mosesaltruism.cocktails.data.remote.asDomainModel
 import com.mosesaltruism.cocktails.databinding.HomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
