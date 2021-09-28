@@ -1,8 +1,9 @@
 package com.mosesaltruism.cocktails.domain.byname.entities.search
 
+import androidx.annotation.NonNull
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.mosesaltruism.cocktails.data.model.search.Drinks
 
 /**
  * SearchedCockTail represents a cocktail entity in the database.
@@ -11,37 +12,48 @@ import com.mosesaltruism.cocktails.data.model.search.Drinks
 data class SearchedCockTailItem constructor(
     @PrimaryKey
     val idDrink: String,
-//    val dateModified: String,
-//    val strAlcoholic: String,
-//    val strCategory: String,
-//    val strCreativeCommonsConfirmed: String,
-    val strDrink: String,
-//    val strDrinkThumb: String,
-//    val strGlass: String,
-//    val strImageSource: String,
-//    val strInstructions: String,
-//    val strInstructionsDE: String,
-//    val strInstructionsIT: String
-    )
 
-/**
- * Map SearchedCockTailItem to domain entities
- */
-fun List<SearchedCockTailItem>.asDomainModel(): List<Drinks> {
-    return map {
-        Drinks(
-            idDrink = it.idDrink,
-//            dateModified = it.dateModified,
-//            strAlcoholic = it.strAlcoholic,
-//            strCategory = it.strCategory,
-//            strCreativeCommonsConfirmed = it.strCreativeCommonsConfirmed,
-            strDrink = it.strDrink,
-//            strDrinkThumb = it.strDrinkThumb,
-//            strGlass = it.strGlass,
-//            strImageSource = it.strImageSource,
-//            strInstructions = it.strInstructions,
-//            strInstructionsDE = it.strInstructionsDE,
-//            strInstructionsIT = it.strInstructionsIT
-        )
-    }
-}
+    @NonNull
+    @ColumnInfo(name = "dateModified")
+    val dateModified: String,
+
+    @NonNull
+    @ColumnInfo(name = "strAlcoholic")
+    val strAlcoholic: String,
+
+    @NonNull
+    @ColumnInfo(name = "strCategory")
+    val strCategory: String,
+
+    @NonNull
+    @ColumnInfo(name = "strCreativeCommonsConfirmed")
+    val strCreativeCommonsConfirmed: String,
+
+    @NonNull
+    @ColumnInfo(name = "strDrink")
+    val strDrink: String,
+
+    @NonNull
+    @ColumnInfo(name = "strDrinkThumb")
+    val strDrinkThumb: String,
+
+    @NonNull
+    @ColumnInfo(name = "strGlass")
+    val strGlass: String,
+
+    @NonNull
+    @ColumnInfo(name = "strImageSource")
+    val strImageSource: String,
+
+    @NonNull
+    @ColumnInfo(name = "strInstructions")
+    val strInstructions: String,
+
+    @NonNull
+    @ColumnInfo(name = "strInstructionsDE")
+    val strInstructionsDE: String,
+
+    @NonNull
+    @ColumnInfo(name = "strInstructionsIT")
+    val strInstructionsIT: String
+)

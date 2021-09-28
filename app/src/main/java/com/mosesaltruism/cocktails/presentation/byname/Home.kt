@@ -1,9 +1,7 @@
 package com.mosesaltruism.cocktails.presentation.byname
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -11,13 +9,11 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.mosesaltruism.cocktails.R
 import com.mosesaltruism.cocktails.core.common.base.BaseFragment
 import com.mosesaltruism.cocktails.core.common.util.EventStates
-import com.mosesaltruism.cocktails.data.remote.Drink
 import com.mosesaltruism.cocktails.data.remote.asDatabaseModel
 import com.mosesaltruism.cocktails.databinding.HomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @AndroidEntryPoint
 class Home : BaseFragment<HomeBinding>() {
