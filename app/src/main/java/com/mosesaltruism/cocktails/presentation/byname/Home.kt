@@ -44,7 +44,7 @@ class Home : BaseFragment<HomeBinding>() {
            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
                viewModel.getSearchedCockTails.collect {
                    //use recyclerview here to display items
-                   binding.tester.text = it.toString()
+                   //binding.tester.text = it.toString()
                }
            }
        }
@@ -59,7 +59,7 @@ class Home : BaseFragment<HomeBinding>() {
         viewLifecycleOwner.lifecycleScope.launch {
             //automatically restarts the block when the lifecycle is STARTED again
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                // Safely collect from locationFlow when the lifecycle is STARTED
+                // Safely collect from searchCockTailFlow when the lifecycle is STARTED
                 // and stops collection when the lifecycle is STOPPED
                 viewModel.searchList.collect {
                     when (it) {
