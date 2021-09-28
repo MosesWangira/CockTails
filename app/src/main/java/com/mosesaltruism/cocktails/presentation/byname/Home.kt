@@ -11,6 +11,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.mosesaltruism.cocktails.R
 import com.mosesaltruism.cocktails.core.common.base.BaseFragment
 import com.mosesaltruism.cocktails.core.common.util.EventStates
+import com.mosesaltruism.cocktails.data.remote.Drink
+import com.mosesaltruism.cocktails.data.remote.asDatabaseModel
+import com.mosesaltruism.cocktails.data.remote.asDomainModel
 import com.mosesaltruism.cocktails.databinding.HomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -25,27 +28,22 @@ class Home : BaseFragment<HomeBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //viewModel.loadCockTails("gin")
-        //showSearchedCockTail()
+        viewModel.loadCockTails("gin")
+        showSearchedCockTail()
 
-
-
-        //two
-        //viewModel.loadList
-        loadCockTailsSearched()
+        collectCockTailsDB()
     }
 
-    private fun loadCockTailsSearched(){
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
-                viewModel.loadList.collect{
-                    binding.tester.text = it.toString()
-                    Timber.d("CheckCollection: $it")
-                }
-            }
-        }
+    //collects cocktails from database
+    private fun collectCockTailsDB(){
+       viewLifecycleOwner.lifecycleScope.launch {
+           viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+               viewModel.getSearchedCockTails.collect {
+                   binding.tester.text = it.toString()
+               }
+           }
+       }
     }
-
 
     private fun showSearchedCockTail() {
         // Create a new coroutine
@@ -57,7 +55,7 @@ class Home : BaseFragment<HomeBinding>() {
                 viewModel.searchList.collect {
                     when (it) {
                         is EventStates.Success -> {
-                            binding.tester.text = it.successResponse.drinks.toString()
+                            viewModel.insertSearchedCockTail(it.successResponse.asDatabaseModel())
                         }
                         is EventStates.Failure -> {
 
@@ -71,4 +69,5 @@ class Home : BaseFragment<HomeBinding>() {
             }
         }
     }
+
 }

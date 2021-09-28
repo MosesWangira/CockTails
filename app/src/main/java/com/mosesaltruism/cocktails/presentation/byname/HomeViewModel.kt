@@ -11,6 +11,7 @@ import com.mosesaltruism.cocktails.data.model.search.Drinks
 //import com.mosesaltruism.cocktails.data.model.search.SearchCockTail
 import com.mosesaltruism.cocktails.data.remote.NetworkSearchContainer
 import com.mosesaltruism.cocktails.data.repository.SearchRepository
+import com.mosesaltruism.cocktails.domain.byname.entities.search.SearchedCockTailItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,26 +32,26 @@ class HomeViewModel @Inject constructor(
 
     private val searchedName = runBlocking { preferences.searchedCocktailName.first() ?: "gin" }
 
-    init {
-        loadCockTailsRoom()
-    }
+//    init {
+//        loadCockTailsRoom()
+//    }
 
-    val loadList: Flow<List<Drinks>> = repository.cockTailsSearched
-
-
-    private fun loadCockTailsRoom(cockTailName: String = " gin"){
-        viewModelScope.launch(dispatchers.io) {
-            try {
-                repository.getSearchedCockTails(cockTailName)
-            }catch (e: Exception){
-                Timber.d("CockTailsException : $e")
-            }
-        }
-    }
+//    val loadList: Flow<List<Drinks>> = repository.cockTailsSearched
 
 
+//    private fun loadCockTailsRoom(cockTailName: String = "gin"){
+//        viewModelScope.launch(dispatchers.io) {
+//            try {
+//                repository.getSearchedCockTails(cockTailName)
+//            }catch (e: Exception){
+//                Timber.d("CockTailsException : $e")
+//            }
+//        }
+//    }
 
 
+    //from DB
+    var getSearchedCockTails  = repository.getCockTailsSearched
 
 
     private val _searchList = MutableStateFlow<EventStates<NetworkSearchContainer>>(
@@ -64,5 +65,9 @@ class HomeViewModel @Inject constructor(
             _searchList.value = EventStates.Loading
             _searchList.value = repository.getSearchResponse(cockTailName)
         }
+    }
+
+    fun insertSearchedCockTail(cocktails: List<SearchedCockTailItem>) = viewModelScope.launch {
+        repository.insertCockTailToDB(cocktails)
     }
 }

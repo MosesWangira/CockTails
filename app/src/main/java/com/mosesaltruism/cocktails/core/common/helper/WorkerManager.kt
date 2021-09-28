@@ -27,7 +27,7 @@ class WorkerManager @AssistedInject constructor(
      */
     override suspend fun doWork(): Result {
         return try {
-            repository.getSearchedCockTails()
+            //repository.getSearchedCockTails()
             Result.success()
         } catch (e: HttpException) {
             Result.retry()

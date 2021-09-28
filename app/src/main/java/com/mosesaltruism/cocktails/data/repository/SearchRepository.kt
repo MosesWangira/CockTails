@@ -13,6 +13,7 @@ import com.mosesaltruism.cocktails.data.remote.Drink
 import com.mosesaltruism.cocktails.data.remote.NetworkSearchContainer
 import com.mosesaltruism.cocktails.data.remote.SearchApi
 import com.mosesaltruism.cocktails.data.remote.asDatabaseModel
+import com.mosesaltruism.cocktails.domain.byname.entities.search.SearchedCockTailItem
 import com.mosesaltruism.cocktails.domain.byname.entities.search.asDomainModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
@@ -27,41 +28,100 @@ class SearchRepository @Inject constructor(
     private val dispatchers: DispatcherProvider,
     private val searchDao: SearchDao
 ) : BaseRepository(api) {
+
+    //get response from internet
     suspend fun getSearchResponse(
         s: String
     ) = safeApiCalls{
         api.getSearchedCocktail(s)
     }
 
-    val cockTailsSearched: Flow<List<Drinks>> =
+    //get searched cocktails from database
+    val getCockTailsSearched: Flow<List<Drinks>> =
         searchDao.getCockTailNameList().map {
             it.asDomainModel()
         }
 
-    suspend fun getSearchedCockTails(name: String = "gin") {
-//        val messages = MutableStateFlow<EventStates<NetworkSearchContainer>>(
-//            EventStates.Empty
-//        )
-
-        val moses: Flow<EventStates<NetworkSearchContainer>> = flow {
-            val latest = getSearchResponse(name)
-            emit(latest)
-        }
-
-        moses.collect {
-            when (it) {
-                is EventStates.Success -> {
-                    Timber.d("MosesAltruism messages: moo ${it.successResponse.drinks.size}")
-                    val n = it.successResponse.drinks
-                    val p = NetworkSearchContainer(n)
-                    searchDao.insertAll(p.asDatabaseModel())
-                }
-            }
+    //insert searched cocktails to database
+    suspend fun insertCockTailToDB(searchedCockTail: List<SearchedCockTailItem>){
+        withContext(dispatchers.io){
+            searchDao.insertAll(searchedCockTail)
         }
     }
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    fun refreshSearchedCocktails(searchedCoktail: List<SearchedCockTailItem>){
+//        //val fromDb = getSearchResponse(name)
+//        searchDao.insertAll(searchedCoktail)
+//    }
+
+
+//    suspend fun getSearchedCockTails(name: String = "gin") {
+////        val messages = MutableStateFlow<EventStates<NetworkSearchContainer>>(
+////            EventStates.Empty
+////        )
+//
+////        val moses: Flow<EventStates<NetworkSearchContainer>> = flow {
+////            val latest = getSearchResponse(name)
+////            emit(latest)
+////            delay(5000)
+////        }
+////
+////        moses.collect {
+////            when (it) {
+////                is EventStates.Success -> {
+////                    Timber.d("MosesAltruism messages: moo ${it.successResponse.drinks}")
+////                    val n = it.successResponse.drinks
+////                    val p = NetworkSearchContainer(n)
+////                    searchDao.insertAll(p.asDatabaseModel())
+////                }
+////                is EventStates.Empty -> "MosesAltruism Empty"
+////                is EventStates.Failure -> "MosesAltruism Failure"
+////                is EventStates.Loading -> "MosesAltruism Loading"
+////            }
+////        }
+////    }
+//
+//
+//
 //        Timber.d("MosesAltruism: This was called")
 //        val _searchedCockTails = MutableStateFlow<EventStates<NetworkSearchContainer>>(
 //           EventStates.Loading
@@ -75,15 +135,10 @@ class SearchRepository @Inject constructor(
 //            searchedCockTails.collect {
 //                when(it){
 //                    is EventStates.Success -> {
-//                        val flowOfLists: Flow<List<Drink>> = flowOf(it.successResponse.drinks)
-//                        val flatList: List<Drink> = flowOfLists.flattenToList()
-//
-//                        Timber.d("MosesAltruism messages: mooy ${flatList}")
-//
 //                        Timber.d("MosesAltruism messages: moo ${it.successResponse.drinks}")
 //                        val m: List<Drink> = it.successResponse.drinks
 //                        val ns = NetworkSearchContainer(m)
-//                        searchDao.insertAll(ns.asDatabaseModel())
+//                        //searchDao.insertAll(ns.asDatabaseModel())
 //                    }
 //
 //                    is EventStates.Loading -> {
@@ -102,9 +157,12 @@ class SearchRepository @Inject constructor(
 //            }
 //        }
 //    }
-//
-//    suspend fun <T> Flow<List<T>>.flattenToList() =
-//        flatMapConcat { it.asFlow() }.toList()
+
+
+
+
+
+
 
 
     //refresh searched cocktail names
