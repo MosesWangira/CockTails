@@ -8,22 +8,31 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.mosesaltruism.cocktails.R
 import com.mosesaltruism.cocktails.core.common.base.BaseFragment
+import com.mosesaltruism.cocktails.core.common.helper.DataStorePreference
 import com.mosesaltruism.cocktails.core.common.util.EventStates
 import com.mosesaltruism.cocktails.data.remote.asDatabaseModel
 import com.mosesaltruism.cocktails.databinding.HomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class Home : BaseFragment<HomeBinding>() {
     override fun getFragmentView(): Int = R.layout.home
     private val viewModel: HomeViewModel by viewModels()
 
+    @Inject
+    lateinit var preferences: DataStorePreference
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.loadCockTails("gin")
+        val cockTailName = runBlocking { preferences.searchedCocktailName.first() }
+
+        viewModel.loadCockTails(cockTailName ?: "gin")
         showSearchedCockTail()
 
         collectCockTailsDB()
@@ -34,10 +43,15 @@ class Home : BaseFragment<HomeBinding>() {
        viewLifecycleOwner.lifecycleScope.launch {
            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
                viewModel.getSearchedCockTails.collect {
+                   //use recyclerview here to display items
                    binding.tester.text = it.toString()
                }
            }
        }
+    }
+
+    private fun uiStaff(){
+
     }
 
     private fun showSearchedCockTail() {
