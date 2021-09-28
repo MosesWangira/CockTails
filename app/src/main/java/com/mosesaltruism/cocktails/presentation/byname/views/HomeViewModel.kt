@@ -1,4 +1,4 @@
-package com.mosesaltruism.cocktails.presentation.byname
+package com.mosesaltruism.cocktails.presentation.byname.views
 
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
