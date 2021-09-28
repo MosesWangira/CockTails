@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="searchResponse"
+            type="com.mosesaltruism.cocktails.domain.byname.entities.search.SearchedCockTailItem"
+            />
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,33 +40,33 @@
                 tools:ignore="NestedWeights">
 
                 <TextView
-                    android:id="@+id/titleRight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:padding="3dp"
-                    android:text="Drink: Gin Fizz"
+                    android:text="@{`Drink :` + searchResponse.strDrink}"
+                    tools:text="Drink: Gin Fizz"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/publicationDateRight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:padding="3dp"
-                    android:text="Type: Alcoholic"
+                    tools:text="Type: Alcoholic"
+                    android:text="@{`Type :` + searchResponse.strAlcoholic}"
                     android:textSize="12sp"
                     android:textStyle="italic"
                     tools:ignore="HardcodedText" />
 
                 <TextView
-                    android:id="@+id/presidentRight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:padding="3dp"
-                    android:text="Category: Ordinary Drink"
+                    tools:text="Category: Ordinary Drink"
+                    android:text="@{`Category :` + searchResponse.strCategory}"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     tools:ignore="HardcodedText" />
@@ -71,7 +77,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:padding="3dp"
-                    android:text="Glass : Whiskey sour glass"
+                    tools:text="Glass : Whiskey sour glass"
+                    android:text="@{`Glass :` + searchResponse.strGlass}"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     tools:ignore="HardcodedText" />
@@ -82,7 +89,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:padding="3dp"
-                    android:text="Date Modified: 8th july 2020"
+                    tools:text="Date Modified: 8th july 2020"
+                    android:text="@{`Date Modified :` + searchResponse.dateModified}"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     tools:ignore="HardcodedText" />
@@ -100,7 +108,8 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/ic_launcher_background"
+                    tools:src="@drawable/ic_launcher_background"
+                    app:imageUrl="@{searchResponse.strDrinkThumb}"
                     android:scaleType="centerCrop"
                     />
 
@@ -113,7 +122,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="@string/lorem"
+            tools:text="@string/lorem"
+            android:text="@{searchResponse.strInstructions}"
             android:textSize="12sp" />
     </LinearLayout>
 </layout>

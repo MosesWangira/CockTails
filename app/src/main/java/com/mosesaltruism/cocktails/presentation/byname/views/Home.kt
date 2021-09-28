@@ -12,6 +12,8 @@ import com.mosesaltruism.cocktails.core.common.helper.DataStorePreference
 import com.mosesaltruism.cocktails.core.common.util.EventStates
 import com.mosesaltruism.cocktails.data.remote.asDatabaseModel
 import com.mosesaltruism.cocktails.databinding.HomeBinding
+import com.mosesaltruism.cocktails.domain.byname.entities.search.SearchedCockTailItem
+import com.mosesaltruism.cocktails.presentation.byname.adapters.SearchAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
@@ -23,6 +25,7 @@ import javax.inject.Inject
 class Home : BaseFragment<HomeBinding>() {
     override fun getFragmentView(): Int = R.layout.home
     private val viewModel: HomeViewModel by viewModels()
+    private var searchAdapter: SearchAdapter? = null
 
     @Inject
     lateinit var preferences: DataStorePreference
@@ -33,7 +36,7 @@ class Home : BaseFragment<HomeBinding>() {
         val cockTailName = runBlocking { preferences.searchedCocktailName.first() }
 
         viewModel.loadCockTails(cockTailName ?: "gin")
-        showSearchedCockTail()
+        getRemoteSearchedCockTail()
 
         collectCockTailsDB()
     }
@@ -43,18 +46,19 @@ class Home : BaseFragment<HomeBinding>() {
        viewLifecycleOwner.lifecycleScope.launch {
            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
                viewModel.getSearchedCockTails.collect {
-                   //use recyclerview here to display items
-                   //binding.tester.text = it.toString()
+                   showLocalSearchedCockTails(it)
                }
            }
        }
     }
 
-    private fun uiStaff(){
-
+    private fun showLocalSearchedCockTails(itemList: List<SearchedCockTailItem>){
+        searchAdapter = SearchAdapter()
+        searchAdapter?.baseItems = itemList
+        binding.cockTailsRecyclerSearched.adapter = searchAdapter
     }
 
-    private fun showSearchedCockTail() {
+    private fun getRemoteSearchedCockTail() {
         // Create a new coroutine
         viewLifecycleOwner.lifecycleScope.launch {
             //automatically restarts the block when the lifecycle is STARTED again
