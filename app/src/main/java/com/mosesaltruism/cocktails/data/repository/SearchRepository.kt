@@ -13,7 +13,6 @@ import javax.inject.Inject
 
 class SearchRepository @Inject constructor(
     private val api: SearchApi,
-    private val preferences: DataStorePreference,
     private val dispatchers: DispatcherProvider,
     private val searchDao: SearchDao
 ) : BaseRepository(api) {
@@ -32,6 +31,13 @@ class SearchRepository @Inject constructor(
     suspend fun insertCockTailToDB(searchedCockTail: List<SearchedCockTailItem>){
         withContext(dispatchers.io){
             searchDao.insertAll(searchedCockTail)
+        }
+    }
+
+    //delete all searched cocktails
+    suspend fun deleteAllSearchedCockTails(){
+        withContext(dispatchers.io){
+            searchDao.deleteAllSearchedCockTails()
         }
     }
 }

@@ -37,10 +37,9 @@ object AppModule {
     @Provides
     fun provideSearchedCockTail(
         api: SearchApi,
-        preferences: DataStorePreference,
         dispatchers: DispatcherProvider,
         searchDao: SearchDao
-    ): SafeApiCalls = SearchRepository(api, preferences, dispatchers, searchDao)
+    ): SafeApiCalls = SearchRepository(api, dispatchers, searchDao)
 
 
     /**

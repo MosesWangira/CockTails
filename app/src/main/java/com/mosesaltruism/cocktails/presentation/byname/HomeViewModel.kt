@@ -3,7 +3,6 @@ package com.mosesaltruism.cocktails.presentation.byname
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mosesaltruism.cocktails.core.common.helper.DataStorePreference
 import com.mosesaltruism.cocktails.core.common.util.DispatcherProvider
 import com.mosesaltruism.cocktails.core.common.util.EventStates
 import com.mosesaltruism.cocktails.data.remote.NetworkSearchContainer
@@ -19,7 +18,6 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val repository: SearchRepository,
     private val dispatchers: DispatcherProvider,
-    private val preferences: DataStorePreference
 ) : ViewModel(), LifecycleObserver {
 
     //from DB
@@ -39,7 +37,11 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun insertSearchedCockTail(cocktails: List<SearchedCockTailItem>) = viewModelScope.launch {
+    fun insertSearchedCockTail(cocktails: List<SearchedCockTailItem>) = viewModelScope.launch(dispatchers.io) {
         repository.insertCockTailToDB(cocktails)
+    }
+
+    fun deleteAllCockTails() = viewModelScope.launch(dispatchers.io) {
+        repository.deleteAllSearchedCockTails()
     }
 }

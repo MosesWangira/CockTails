@@ -50,7 +50,10 @@ class Home : BaseFragment<HomeBinding>() {
                 viewModel.searchList.collect {
                     when (it) {
                         is EventStates.Success -> {
-                            viewModel.insertSearchedCockTail(it.successResponse.asDatabaseModel())
+                            viewModel.apply {
+                                deleteAllCockTails()
+                                insertSearchedCockTail(it.successResponse.asDatabaseModel())
+                            }
                         }
                         is EventStates.Failure -> {
 

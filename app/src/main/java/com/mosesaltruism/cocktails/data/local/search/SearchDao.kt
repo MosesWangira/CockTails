@@ -1,9 +1,6 @@
 package com.mosesaltruism.cocktails.data.local.search
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.mosesaltruism.cocktails.domain.byname.entities.search.SearchedCockTailItem
 import kotlinx.coroutines.flow.Flow
 
@@ -19,4 +16,7 @@ interface SearchDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll( searchedCockTail: List<SearchedCockTailItem>)
+
+    @Query("delete from searched_cocktail")
+    suspend fun deleteAllSearchedCockTails()
 }
