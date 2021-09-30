@@ -5,6 +5,7 @@ import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.mosesaltruism.cocktails.data.repository.SearchRepository
+import com.mosesaltruism.cocktails.presentation.byname.views.Home
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import retrofit2.HttpException
@@ -27,7 +28,8 @@ class WorkerManager @AssistedInject constructor(
      */
     override suspend fun doWork(): Result {
         return try {
-            //repository.getSearchedCockTails()
+            //repository.getSearchResponse("margarita")
+            //Home().getRemoteSearchedCockTail()
             Result.success()
         } catch (e: HttpException) {
             Result.retry()

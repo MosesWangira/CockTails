@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseAdapters : RecyclerView.Adapter<BaseViewHolder>() {
+abstract class BaseAdapters() : RecyclerView.Adapter<BaseViewHolder>() {
 
     var baseItems: List<Any> = emptyList()
         set(value) {
@@ -27,10 +27,7 @@ abstract class BaseAdapters : RecyclerView.Adapter<BaseViewHolder>() {
 
     override fun getItemCount() = baseItems.size
 
-
     abstract fun getLayoutView(): Int
-
-
 }
 
 class BaseViewHolder(val viewDataBinding: ViewDataBinding) :

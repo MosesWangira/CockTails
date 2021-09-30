@@ -2,13 +2,18 @@ package com.mosesaltruism.cocktails
 
 import android.app.Application
 import android.os.Build
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.*
+import com.mosesaltruism.cocktails.core.common.helper.DataStorePreference
 import com.mosesaltruism.cocktails.core.common.helper.WorkerManager
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -17,6 +22,10 @@ import javax.inject.Inject
 class CockTails : Application(), Configuration.Provider {
     @Inject
     lateinit var workerFactory: HiltWorkerFactory
+
+    @Inject
+    lateinit var preferences: DataStorePreference
+
 
     override fun getWorkManagerConfiguration(): Configuration =
         Configuration.Builder()
@@ -57,6 +66,8 @@ class CockTails : Application(), Configuration.Provider {
     override fun onCreate() {
         super.onCreate()
 
+        setUpDarkOrLightMode()
+
         //initialize WorkManager
         WorkManager.initialize(this, workManagerConfiguration)
         delayedInit()
@@ -64,6 +75,15 @@ class CockTails : Application(), Configuration.Provider {
         //initialize Timber
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
+        }
+    }
+
+    private fun setUpDarkOrLightMode(){
+        val theme = runBlocking { preferences.themeStatus.first() ?: "Light" }
+        if (theme == "Light") {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
     }
 }

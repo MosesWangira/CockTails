@@ -2,6 +2,7 @@ package com.mosesaltruism.cocktails.presentation.byname.views
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -15,6 +16,7 @@ import com.mosesaltruism.cocktails.databinding.HomeBinding
 import com.mosesaltruism.cocktails.domain.byname.entities.search.SearchedCockTailItem
 import com.mosesaltruism.cocktails.presentation.byname.adapters.SearchAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -35,7 +37,7 @@ class Home : BaseFragment<HomeBinding>() {
 
         val cockTailName = runBlocking { preferences.searchedCocktailName.first() }
 
-        viewModel.loadCockTails(cockTailName ?: "gin")
+        viewModel.loadCockTails(cockTailName ?: "margarita")
         getRemoteSearchedCockTail()
 
         collectCockTailsDB()
@@ -70,14 +72,19 @@ class Home : BaseFragment<HomeBinding>() {
                         is EventStates.Success -> {
                             viewModel.apply {
                                 deleteAllCockTails()
+                                delay(3000)
                                 insertSearchedCockTail(it.successResponse.asDatabaseModel())
                             }
                         }
                         is EventStates.Failure -> {
-
+                            Toast.makeText(requireContext(), "failed", Toast.LENGTH_SHORT).show()
                         }
                         is EventStates.Loading -> {
+                            Toast.makeText(requireContext(), "loading", Toast.LENGTH_SHORT).show()
+                        }
 
+                        is EventStates.Empty -> {
+                            Toast.makeText(requireContext(), "empty", Toast.LENGTH_SHORT).show()
                         }
                         else -> Unit
                     }

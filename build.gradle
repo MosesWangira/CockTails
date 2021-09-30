@@ -92,6 +92,10 @@ buildscript {
                 'androidx.datastore:datastore-preferences:1.0.0-beta02',
                 'androidx.hilt:hilt-work:1.0.0'
         ]
+
+        colorPallete = [
+                'androidx.palette:palette-ktx:1.0.0'
+        ]
     }
 
     repositories {

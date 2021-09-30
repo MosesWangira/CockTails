@@ -9,4 +9,5 @@ object Constants {
 
     //datastore constants
     val COCKTAIL_NAME = stringPreferencesKey("searched_cocktail_name")
+    val THEME_STATUS = stringPreferencesKey("theme_status")
 }

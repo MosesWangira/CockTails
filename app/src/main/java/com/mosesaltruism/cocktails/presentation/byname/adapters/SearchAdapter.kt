@@ -13,6 +13,8 @@ class SearchAdapter : BaseAdapters(){
         val layoutBinder = holder.viewDataBinding as SearchedCocktailItemBinding
         layoutBinder.also {
             it.searchResponse = baseItems[position] as SearchedCockTailItem?
+
+            //change backgrounds
         }
     }
 }
