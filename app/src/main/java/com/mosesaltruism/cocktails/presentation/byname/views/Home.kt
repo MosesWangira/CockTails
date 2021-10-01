@@ -2,6 +2,8 @@ package com.mosesaltruism.cocktails.presentation.byname.views
 
 import android.os.Bundle
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -60,6 +62,7 @@ class Home : BaseFragment<HomeBinding>() {
         binding.cockTailsRecyclerSearched.adapter = searchAdapter
     }
 
+
     private fun getRemoteSearchedCockTail() {
         // Create a new coroutine
         viewLifecycleOwner.lifecycleScope.launch {
@@ -70,17 +73,16 @@ class Home : BaseFragment<HomeBinding>() {
                 viewModel.searchList.collect {
                     when (it) {
                         is EventStates.Success -> {
+                            binding.cockTailsRecyclerSearched.visibility = VISIBLE
                             viewModel.apply {
-                                deleteAllCockTails()
-                                delay(3000)
-                                insertSearchedCockTail(it.successResponse.asDatabaseModel())
+                                deleteAndInsertNewCockTails(it.successResponse.asDatabaseModel())
                             }
                         }
                         is EventStates.Failure -> {
-                            Toast.makeText(requireContext(), "failed", Toast.LENGTH_SHORT).show()
+                            binding.cockTailsRecyclerSearched.visibility = VISIBLE
                         }
                         is EventStates.Loading -> {
-                            Toast.makeText(requireContext(), "loading", Toast.LENGTH_SHORT).show()
+                           binding.cockTailsRecyclerSearched.visibility = GONE
                         }
 
                         is EventStates.Empty -> {

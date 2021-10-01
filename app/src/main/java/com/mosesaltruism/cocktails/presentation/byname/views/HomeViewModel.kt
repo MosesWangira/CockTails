@@ -37,11 +37,15 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun insertSearchedCockTail(cocktails: List<SearchedCockTailItem>) = viewModelScope.launch(dispatchers.io) {
-        repository.insertCockTailToDB(cocktails)
+    fun deleteAndInsertNewCockTails(cocktails: List<SearchedCockTailItem>) = viewModelScope.launch(dispatchers.io){
+        repository.deleteAndInsertNewCockTails(cocktails)
     }
 
-    fun deleteAllCockTails() = viewModelScope.launch(dispatchers.io) {
-        repository.deleteAllSearchedCockTails()
-    }
+//    fun insertSearchedCockTail(cocktails: List<SearchedCockTailItem>) = viewModelScope.launch(dispatchers.io) {
+//        repository.insertCockTailToDB(cocktails)
+//    }
+//
+//    fun deleteAllCockTails() = viewModelScope.launch(dispatchers.io) {
+//        repository.deleteAllSearchedCockTails()
+//    }
 }

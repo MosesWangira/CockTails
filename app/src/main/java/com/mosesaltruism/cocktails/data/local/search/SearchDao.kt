@@ -19,4 +19,11 @@ interface SearchDao {
 
     @Query("delete from searched_cocktail")
     suspend fun deleteAllSearchedCockTails()
+
+    @Transaction
+    suspend fun insertAndDeleteTransaction(searchedCockTail: List<SearchedCockTailItem>){
+        //runs in single transaction
+        deleteAllSearchedCockTails()
+        insertAll(searchedCockTail)
+    }
 }
