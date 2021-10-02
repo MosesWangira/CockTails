@@ -64,4 +64,5 @@ dependencies {
     implementation dataStoreDependency
     implementation workManagerDependency
     implementation colorPallete
+    implementation googleTruth
 }

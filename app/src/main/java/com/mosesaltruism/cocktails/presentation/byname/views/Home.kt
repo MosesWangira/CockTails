@@ -39,7 +39,7 @@ class Home : BaseFragment<HomeBinding>() {
 
         val cockTailName = runBlocking { preferences.searchedCocktailName.first() }
 
-        viewModel.loadCockTails(cockTailName ?: "margarita")
+        viewModel.loadCockTails(cockTailName ?: "gin")
         getRemoteSearchedCockTail()
 
         collectCockTailsDB()
