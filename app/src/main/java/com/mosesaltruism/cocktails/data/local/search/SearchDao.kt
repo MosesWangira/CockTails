@@ -14,6 +14,10 @@ interface SearchDao {
     @Query("select * from searched_cocktail")
     fun getCockTailNameList(): Flow<List<SearchedCockTailItem>>
 
+    //for testing
+    @Query("select * from searched_cocktail")
+    fun getCockTailNameList2(): List<SearchedCockTailItem>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll( searchedCockTail: List<SearchedCockTailItem>)
 
