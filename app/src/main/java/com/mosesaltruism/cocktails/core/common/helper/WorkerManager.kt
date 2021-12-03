@@ -11,6 +11,10 @@ import dagger.assisted.AssistedInject
 import retrofit2.HttpException
 
 
+/***
+ * This class will never be used probably
+ * */
+
 @HiltWorker
 class WorkerManager @AssistedInject constructor(
     @Assisted appContext: Context,

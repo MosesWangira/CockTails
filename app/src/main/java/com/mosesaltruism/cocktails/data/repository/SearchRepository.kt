@@ -26,23 +26,9 @@ class SearchRepository @Inject constructor(
     //get searched cocktails from database
     val getCockTailsSearched: Flow<List<SearchedCockTailItem>> = searchDao.getCockTailNameList()
 
-//    //insert searched cocktails to database
-//    suspend fun insertCockTailToDB(searchedCockTail: List<SearchedCockTailItem>){
-//        withContext(dispatchers.io){
-//            searchDao.insertAll(searchedCockTail)
-//        }
-//    }
-
     suspend fun deleteAndInsertNewCockTails(searchedCockTail: List<SearchedCockTailItem>){
         withContext(dispatchers.io){
             searchDao.insertAndDeleteTransaction(searchedCockTail)
         }
     }
-
-//    //delete all searched cocktails
-//    suspend fun deleteAllSearchedCockTails(){
-//        withContext(dispatchers.io){
-//            searchDao.deleteAllSearchedCockTails()
-//        }
-//    }
 }
