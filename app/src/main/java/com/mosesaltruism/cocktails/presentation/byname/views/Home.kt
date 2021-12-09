@@ -86,7 +86,7 @@ class Home : BaseFragment<HomeBinding>() {
                         }
 
                         is EventStates.Empty -> {
-                            Toast.makeText(requireContext(), "empty", Toast.LENGTH_SHORT).show()
+
                         }
                         else -> Unit
                     }
